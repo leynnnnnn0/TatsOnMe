@@ -11,8 +11,14 @@ Route::middleware('guest:artist')->prefix('artist')->group(function () {
     Route::controller(ArtistAuthController::class)->group(function () {
         Route::get('register', 'showRegistrationForm');
         Route::post('register', 'register');
+        Route::get('login', 'showLoginForm');
+        Route::post('login', 'login');
     });
 });
+
+Route::post('artist/logout', [ArtistAuthController::class, 'logout'])
+    ->middleware('auth:artist')
+    ->name('artist.logout');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {

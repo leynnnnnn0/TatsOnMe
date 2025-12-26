@@ -1,5 +1,6 @@
 import { useAuth } from '@/hooks/use-auth';
 import LOGO from '../../../public/images/mainLogo.png';
+import { router } from '@inertiajs/react';
 export default function Home() {
     const auth = useAuth();
     console.log(auth.isAuthenticated);
@@ -8,9 +9,15 @@ export default function Home() {
             <nav className="flex h-18 items-center justify-between border-b border-gray-200 px-14">
                 <img src={LOGO} alt="Logo" className="w-32" />
                 <div className="flex items-center justify-between gap-5">
-                    <button className="cursor-pointer rounded-2xl bg-primary px-5 py-2 text-xs font-bold text-white">
-                        Log In
-                    </button>
+                    {auth.isAuthenticated ? (
+                        <button onClick={() => router.post('/artist/logout')} className="cursor-pointer rounded-2xl bg-primary px-5 py-2 text-xs font-bold text-white">
+                            Logout
+                        </button>
+                    ) : (
+                        <button onClick={() => router.get('/artist/login')} className="cursor-pointer rounded-2xl bg-primary px-5 py-2 text-xs font-bold text-white">
+                            Log In
+                        </button>
+                    )}
                 </div>
             </nav>
 

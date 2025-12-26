@@ -24,17 +24,17 @@ export default function Register() {
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
-        post('/artist/register', {
+        post('/artist/login', {
             onSuccess: () => {
-                reset('password', 'password_confirmation');
+                reset('password');
             },
-            onFinish: () => reset('password', 'password_confirmation'),
+            onFinish: () => reset('password'),
         });
     };
 
     return (
         <>
-            <Head title="Artist Register" />
+            <Head title="Artist Login" />
             <div className="flex min-h-screen items-center justify-center p-4">
                 <Card className="w-full max-w-md shadow-xl">
                     <CardHeader className="space-y-3">
@@ -50,33 +50,6 @@ export default function Register() {
 
                     <form onSubmit={submit}>
                         <CardContent className="space-y-4">
-                            <div className="space-y-2">
-                                <Label
-                                    htmlFor="username"
-                                    className="flex items-center gap-2"
-                                >
-                                    <User className="h-4 w-4" />
-                                    Username
-                                </Label>
-                                <Input
-                                    id="username"
-                                    type="text"
-                                    value={data.username}
-                                    onChange={(e) =>
-                                        setData('username', e.target.value)
-                                    }
-                                    placeholder="johndoe"
-                                    required
-                                    autoFocus
-                                    className="h-11"
-                                />
-                                {errors.username && (
-                                    <p className="text-sm text-destructive">
-                                        {errors.username}
-                                    </p>
-                                )}
-                            </div>
-
                             <div className="space-y-2">
                                 <Label
                                     htmlFor="email"
@@ -128,29 +101,6 @@ export default function Register() {
                                 )}
                             </div>
 
-                            <div className="space-y-2">
-                                <Label
-                                    htmlFor="password_confirmation"
-                                    className="flex items-center gap-2"
-                                >
-                                    <Lock className="h-4 w-4" />
-                                    Confirm Password
-                                </Label>
-                                <Input
-                                    id="password_confirmation"
-                                    type="password"
-                                    value={data.password_confirmation}
-                                    onChange={(e) =>
-                                        setData(
-                                            'password_confirmation',
-                                            e.target.value,
-                                        )
-                                    }
-                                    placeholder="••••••••"
-                                    required
-                                    className="h-11"
-                                />
-                            </div>
                         </CardContent>
 
                         <CardFooter className="mt-5 flex flex-col space-y-4">
@@ -160,14 +110,14 @@ export default function Register() {
                                 disabled={processing}
                             >
                                 {processing
-                                    ? 'Creating account...'
-                                    : 'Create Account'}
+                                    ? 'Logging in...'
+                                    : 'Login'}
                             </Button>
 
                             <div className="text-center text-sm text-muted-foreground">
-                                Already have an account?{' '}
+                                Dont have an account?{' '}
                                 <Link
-                                    href={'/artist/login'}
+                                    href={'/artist/register'}
                                     className="font-semibold text-primary hover:text-primary/80 hover:underline"
                                 >
                                     Sign up
